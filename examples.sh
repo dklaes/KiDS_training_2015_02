@@ -38,3 +38,25 @@ SEEING=0.7
 awk -v FILTER=$FILTER -v SEEING=$SEEING \
      '($5<$SEEING && $7==$FILTER) {print $0}'
 # Also possible to calculate e.g. mean with awk via a C-like script.
+
+
+# for / while loops
+i=1
+for CHARACTER in a b c d e
+do
+  echo ${CHARACTER} ${i}
+  i=$(( $i+1 ))
+done
+
+while read POINTING RA DEC
+do
+  echo ${POINTING}
+done < pointings.txt
+
+# ldactools
+# See also marvinweb.astro.uni-bonn.de/data_products/THELIWWW/LDAC/LDAC_advanced.html
+ldacdesc -i V0.5.6A
+
+ldactoasc -i V0.5.6A.cat -t STATS
+ldactoasc -i V0.5.6A.cat -t STATS -s
+ldactoasc -i V0.5.6A.cat -t STATS -s -k IMAGENAME SEEING e1 e2 RZP V0.5.6A
