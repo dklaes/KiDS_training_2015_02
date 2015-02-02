@@ -1,0 +1,37 @@
+# If you don't want to type in your password again and again, do the following:
+ssh-copy-id -p 1234 USERNAME@gate1.astro.uni-bonn.de
+
+# Put the following lines into .ssh/config
+Host gate1
+        Port 1234
+        Hostname gate1.astro.uni-bonn.de
+        ForwardX11 yes
+Host gate2
+        Port 1234
+        Hostname gate2.astro.uni-bonn.de
+        ForwardX11 yes
+Host gate3
+        Port 1234
+        Hostname gate3.astro.uni-bonn.de
+        ForwardX11 yes
+Host gate4
+        Hostname gate4.astro.uni-bonn.de
+        ForwardX11 yes
+Host aibn41
+        Hostname aibn41.astro.uni-bonn.de
+        ProxyCommand ssh -q -W %h:%p gate4
+        ForwardX11 yes
+Host euclid1
+        Hostname euclid1.astro.uni-bonn.de
+        ProxyCommand ssh -q -W %h:%p gate4
+        ForwardX11 yes
+Host euclid2
+        Hostname euclid2.astro.uni-bonn.de
+        ProxyCommand ssh -q -W %h:%p gate4
+        ForwardX11 yes
+
+
+
+# Put this into your .bashrc file:
+alias euclid1='autossh euclid1'		# If autossh is not installed, use ssh. autossh just reconnects you when it detects that the ssh connection was interrupted!
+
