@@ -23,10 +23,10 @@ sed 's/D3/D99/g' exposures.txt
 
 # Pipelines
 # Print only those lines which are in D3 and replace them with D99
-awk '($2="D3") {print $0}' exposures.txt | sed 's/D3/D99/g'
+awk '($2=="D3") {print $0}' exposures.txt | sed 's/D3/D99/g'
 
 # Same, but now save it to replaced.txt
-awk '($2="D3") {print $0}' exposures.txt | sed 's/D3/D99/g' > replaced.txt
+awk '($2=="D3") {print $0}' exposures.txt | sed 's/D3/D99/g' > replaced.txt
 
 
 
@@ -36,7 +36,7 @@ SEEING=0.7
 
 # Print only those lines with a seeing of 0.7 or smaller in the r-band.
 awk -v FILTER=$FILTER -v SEEING=$SEEING \
-     '($5<$SEEING && $7==$FILTER) {print $0}'
+     '($5<$SEEING && $7==$FILTER) {print $0}' exposures.txt
 # Also possible to calculate e.g. mean with awk via a C-like script.
 
 
@@ -55,7 +55,7 @@ done < pointings.txt
 
 # ldactools
 # See also marvinweb.astro.uni-bonn.de/data_products/THELIWWW/LDAC/LDAC_advanced.html
-ldacdesc -i V0.5.6A
+ldacdesc -i V0.5.6A.cat 
 
 ldactoasc -i V0.5.6A.cat -t STATS
 ldactoasc -i V0.5.6A.cat -t STATS -s
